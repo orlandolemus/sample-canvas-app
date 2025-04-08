@@ -25,54 +25,62 @@
                 padding: 0px;
                 margin: auto;
             }
+            body {
+                font-family: sans-serif;
+                padding: 2rem;
+            }
+            button {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+                background-color: #0070d2;
+                color: white;
+                border: none;
+                border-radius: 0.3rem;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #005fb2;
+            }
         </style>
         <script type="text/javascript" src="/js/canvas-all.js"></script>
 
     </head>
     <body>
-
         <% 
             var user = "No user";
             if (context != "") { 
                 var user = context['context']['user']['userName'];
             }
-            
         %>
-
         <div id="full-banner"><p>You're connected to this system as <%= user %>.</p></div>
         <div>
-            <button id="sendEvent">Send Event to Aura</button>
+            <button id="sendEvent">Send Custom Event to Salesforce</button>
         </div>
-        <!-- <img id="ctx" src="<%= url %>" style="width:50px;" /> -->
 
         <script>
-            console.log("SFDC Raw Context: <%= JSON.parse(JSON.stringify(context)) %>");
             const client = <%- JSON.stringify(context.client) %>;
 
             console.log("Context.Client: " , client);
 
             Sfdc.canvas.onReady(() => {
-                console.log("Canvas SDK Ready, publishing event to SF");
-                Sfdc.canvas.client.publish(client, {
-                    name: 'customEventFromCanvas',
-                    payload: {
-                      message: 'Hello from Canvas!',
-                      time: new Date().toISOString()
-                    }
-                });
+                console.log("Canvas SDK Ready");
 
+                // For this example the event is published by clicking a button.
                 document.getElementById("sendEvent").addEventListener("click", () => {
-                    console.log("Canvas SDK Ready");
-                    const client = <%- JSON.stringify(context.client) %>;
-                    console.log("CLIENT: ", client);
+
+                    // Use this script to send the Cart_UUID to the Salesforce JS Component: 
+                    // ######## Script Start ########
+                    const client = <%- JSON.stringify(context.client) %>; // Canvas App context from app.js
+                    console.log("Canvas Client Object: ", client);
                     Sfdc.canvas.client.publish(client, {
-                        name: "customEventFromCanvas",
-                        payload: {
-                        message: "Hello Aura!",
-                        time: new Date().toISOString()
-                        },
-                        targetOrigin: "*"
+                        name: "sfcanvas_ecat.cart_uuid_new", // The Salesforce JS Component will listen to this event name
+                        payload: { // Payload can be anything, I suggest this structure:
+                            status: 'success', // | error
+                            message: "Success or Error message here",
+                            cartUUID: 'abcde-12345-abcde'
+                        }
                     });
+                    // ######## Script End ########
                 });
             });
         </script>
