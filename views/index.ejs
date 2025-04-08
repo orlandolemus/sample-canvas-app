@@ -2,13 +2,6 @@
 <html>
     <head>
         <style> 
-            body {
-                margin: 0px;
-                padding: 0px;
-            }
-            img {
-                width: 100%;
-            }
             #full-banner {
                 width: 100%;
                 padding: 5px;
@@ -28,6 +21,10 @@
             body {
                 font-family: sans-serif;
                 padding: 2rem;
+            }
+            .btn-container {
+                text-align: center;
+                margin: 0 auto;
             }
             button {
                 margin-top: 10px;
@@ -55,7 +52,7 @@
             }
         %>
         <div id="full-banner"><p>You're connected to this system as <%= user %>.</p></div>
-        <div>
+        <div class="btn-container">
             <button id="sendEvent">Send Cart_UUID to Salesforce</button>
         </div>
 
