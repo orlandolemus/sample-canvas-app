@@ -71,7 +71,7 @@
                     // ######## Script Start ########
                     const client = <%- JSON.stringify(context.client) %>; // Canvas App context from app.js
                     console.log("Canvas Client Object: ", client);
-                    Sfdc.canvas.client.publish({
+                    Sfdc.canvas.client.publish(client, {
                         name: "sfcanvas_ecat.cart_uuid_new", // The Salesforce JS Component will listen to this event name
                         payload: { // Payload can be anything, I suggest this structure:
                             status: 'success', // | error
