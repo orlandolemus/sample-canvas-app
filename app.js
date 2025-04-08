@@ -10,6 +10,7 @@ var decode = require('./parse-signed-request.js');
 
 //Content
 app.use('/views', express.static(path.join(__dirname, 'views')))
+app.use('/js', express.static(path.join(__dirname, 'js')));
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ entended: true }));
