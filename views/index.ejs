@@ -35,7 +35,10 @@
             var user = "No user";
             if (context != "") { 
                 var user = context['context']['user']['userName'];
+                console.log("context: " , context);
+                console.log("Sfdc.canvas: " , JSON.parse(JSON.stringify(Sfdc.canvas)));
             }
+            
         %>
 
         <div id="full-banner"><p>You're connected to this system as <%= user %>.</p></div>
