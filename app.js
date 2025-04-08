@@ -29,7 +29,7 @@ app.get('/', function (req, res) {
 
 //Return for the fixed page 
 app.get('/canvas-demo/',function(req,res) {
-  res.render('index', { context: "", url: process.env.IMAGE_URL});
+  res.render('index', { context: ""});
 });
 
 //Signed request for canvas app
@@ -47,10 +47,10 @@ app.post('/canvas-demo/', function (req, res) {
     
     signed_request = JSON.parse(body)['signed_request']
 
-    var json = decode(signed_request, process.env.CANVAS_CONSUMER_SECRET);
+    var canvas_signed_request = decode(signed_request, process.env.CANVAS_CONSUMER_SECRET);
 
     //Render and pass
-    res.render('index', { context: json, url: process.env.IMAGE_URL });
+    res.render('index', { context: canvas_signed_request });
  } else {
     res.send("Canvas authentication failed");
   };
