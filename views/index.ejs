@@ -51,7 +51,7 @@
                 var user = context['context']['user']['userName'];
             }
         %>
-        <div id="full-banner"><p>You're connected to this system as <%= user %>.</p></div>
+        <div id="full-banner"><p>User in Salesforce Canvas App: <%= user %>.</p></div>
         <div class="btn-container">
             <button id="sendEvent">Send Cart_UUID to Salesforce</button>
         </div>
@@ -71,7 +71,7 @@
                     // ######## Script Start ########
                     const client = <%- JSON.stringify(context.client) %>; // Canvas App context from app.js
                     console.log("Canvas Client Object: ", client);
-                    Sfdc.canvas.client.publish(client, {
+                    Sfdc.canvas.client.publish({
                         name: "sfcanvas_ecat.cart_uuid_new", // The Salesforce JS Component will listen to this event name
                         payload: { // Payload can be anything, I suggest this structure:
                             status: 'success', // | error
