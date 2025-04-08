@@ -44,14 +44,14 @@
         <!-- <img id="ctx" src="<%= url %>" style="width:50px;" /> -->
 
         <script>
-            console.log("SFDC Raw Context: <%= context %>");
+            console.log("SFDC Raw Context: <%= JSON.stringify(context) %>");
             const client = <%- JSON.stringify(context.client) %>;
 
             console.log("Context.Client: " , client);
 
             Sfdc.canvas.onReady(() => {
                 console.log("Canvas SDK Ready, publishing event to SF");
-                Sfdc.canvas.publisher.publish({
+                Sfdc.canvas.client.publish({
                     name: 'customEventFromCanvas',
                     payload: {
                       message: 'Hello from Canvas!',
