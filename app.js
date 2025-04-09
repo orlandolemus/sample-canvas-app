@@ -23,7 +23,7 @@ var consumerSecret = process.env.CANVAS_CONSUMER_SECRET;
 
 //Define request response in root URL (/)
 app.get('/', function (req, res) {
-  res.json({'context': 'Welcome to the Sample Canvas back-end API. Please refer to the links for further calls.','links': [{'name': 'canvas-demo', 'href': '/canvas-demo/'}] });
+  res.json({'context': 'Sample Canvas back-end API.' });
   res.end();
 })
 
